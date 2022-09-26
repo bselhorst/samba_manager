@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% block title %} User's Group {% endblock %} {% block
+content %}
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							{% if new %} Cadastrando novo usuário e acessos {% else %}
+							Editando o acesso do usuário {% endif %}
+						</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						{% if new %}
+						<div class="alert alert-danger alert-dismissible">
+							<button
+								type="button"
+								class="close"
+								data-dismiss="alert"
+								aria-hidden="true"
+							>
+								×
+							</button>
+							<h5><i class="icon fas fa-ban"></i> Alert!</h5>
+							Você está adicionarndo um novo usuário, por favor, digite a senha
+							abaixo
+						</div>
+						{% endif %}
+						<form method="POST" id="userForm" action="/userGroups/{{username}}">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Access</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="row">
+												{% for folder in folders %}
+												<div class="col-sm-2">
+													<!-- checkbox -->
+													<div class="form-group">
+														<div
+															class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success"
+														>
+															<input
+																type="checkbox"
+																name="checkbox"
+																value="{{ folder }}"
+																class="custom-control-input"
+																id="{{ folder }}"
+																{%
+																if
+																folder
+																in
+																groups
+																%}
+																checked
+																{%
+																endif
+																%}
+															/>
+															<label
+																class="custom-control-label"
+																for="{{ folder }}"
+																>{{ folder }}</label
+															>
+														</div>
+													</div>
+												</div>
+												{% endfor %}
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% if new %}
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input
+									type="password"
+									name="password"
+									class="form-control"
+									id="password"
+									placeholder="Password"
+								/>
+							</div>
+							{% endif %}
+							<button type="submit" class="btn btn-primary">
+								{% if new %} Cadastrar {% else %} Editar {% endif %}
+							</button>
+						</form>
+					</div>
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</section>
+{% endblock %} {% block js %}
+<script>
+	$(function () {
+		//$.validator.setDefaults({
+		//	submitHandler: function () {
+		//		alert("Form successful submitted!");
+		//	},
+		//});
+		$("#userForm").validate({
+			rules: {
+				password: {
+					required: true,
+					minlength: 5,
+				},
+			},
+			messages: {
+				password: {
+					required: "Por favor digite uma senha",
+					minlength: "Sua senha deve ter pelo menos 5 caracteres",
+				},
+			},
+			errorElement: "span",
+			errorPlacement: function (error, element) {
+				error.addClass("invalid-feedback");
+				element.closest(".form-group").append(error);
+			},
+			highlight: function (element, errorClass, validClass) {
+				$(element).addClass("is-invalid");
+			},
+			unhighlight: function (element, errorClass, validClass) {
+				$(element).removeClass("is-invalid");
+			},
+		});
+	});
+</script>
+{% endblock %}

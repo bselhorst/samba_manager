@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% block title %} Criação do Certificado {% endblock
+%} {% block content %}
+<section class="content">
+	<div class="col-md-12">
+		<!-- Application buttons -->
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Formulário de criação de certificado</h3>
+			</div>
+			<form action="/criarCertificacdo" method="POST">
+				<div class="card-body">
+					<div class="form-group">
+						<label for="background">Fundo do certificado</label>
+						<input
+							type="file"
+							name="background"
+							class="form-control"
+							id="background"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="titulo">Título</label>
+						<input
+							type="text"
+							name="titulo"
+							class="form-control"
+							id="titulo"
+							placeholder="Username"
+							value="Certificado"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="descricao">Descrição do Certificado</label>
+						<input
+							type="text"
+							name="descricao"
+							class="form-control"
+							id="descricao"
+							placeholder="Username"
+							value="Certificamos que Fulano participou do processo seletivo sendo x horas e x minutos no dia x de janeiro de 2020"
+							required
+						/>
+					</div>
+				</div>
+				<!-- /.card-body -->
+				<div class="card-header">
+					<h3 class="card-title">Assinaturas</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="assinatura">Imagem da Assinatura</label>
+						<input
+							type="file"
+							name="assinatura"
+							class="form-control"
+							id="assinatura"
+							required
+						/>
+					</div>
+				</div>
+
+				<div class="card-header">
+					<h3 class="card-title">Apoiadores</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="apoiador">Apoiador</label>
+						<input
+							type="file"
+							name="apoiador"
+							class="form-control"
+							id="apoiador"
+							required
+						/>
+					</div>
+				</div>
+
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.container-fluid -->
+</section>
+{% endblock %}

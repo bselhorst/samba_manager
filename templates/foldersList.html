@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %} Folder's List {% endblock %} {%
+block content %}
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Folder's List ( {{ total }})</h3>
+					</div>
+					<div class="card-body p-0">
+						<table class="table table-sm">
+							<thead>
+								<tr>
+									<th>Folder</th>
+									<th>Tamanho</th>
+									<th style="width: 80px">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for folder in folders %} {% if folder != "" %}
+								<tr>
+									<td>{{ folder.split()[1][5:] }}</td>
+									<td>{{ folder.split()[0] }}</td>
+									<td>
+										<span class="badge bg-info"
+											><a href="/folderUsers/{{folder.split()[1][5:]}}"
+												>Usuários</a
+											></span
+										>
+									</td>
+								</tr>
+								{% endif %} {% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-header -->
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</section>
+{% endblock %}
